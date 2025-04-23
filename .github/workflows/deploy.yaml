@@ -11,14 +11,14 @@ jobs:
     strategy:
       matrix:
         config:
-          - { host: '192.168.2.121', stack_name: 'uptime-kuma' }
-          - { host: '192.168.2.121', stack_name: 'watchtower' }
-          - { host: '192.168.2.149', stack_name: 'watchtower' }
-          - { host: '192.168.2.121', stack_name: 'n8n-cloudflared' }
-          - { host: '192.168.2.121', stack_name: 'vaultwarden' }
-          - { host: '192.168.2.121', stack_name: 'torrent' }
-          - { host: '192.168.2.121', stack_name: 'cadvisor' }
-          - { host: '192.168.2.122', stack_name: 'cadvisor' }
+          - { host: '192.168.50.236', stack_name: 'uptime-kuma' }
+          - { host: '192.168.50.236', stack_name: 'watchtower' }
+          - { host: '192.168.50.236', stack_name: 'watchtower' }
+          - { host: '192.168.50.236', stack_name: 'n8n-cloudflared' }
+          - { host: '192.168.50.236', stack_name: 'vaultwarden' }
+          - { host: '192.168.50.236', stack_name: 'torrent' }
+          - { host: '192.168.50.236', stack_name: 'cadvisor' }
+          - { host: '192.168.50.236', stack_name: 'cadvisor' }
 
     env:
       DOCKER_HOST: tcp://${{ matrix.config.host }}:2375
@@ -39,7 +39,7 @@ jobs:
       - name: Inject secrets (n8n-cloudflared)
         if: env.DOCKER_PROJECT_NAME == 'n8n-cloudflared'
         run: |
-          echo "${{ secrets.N8N_SECRETS }}" >> $GITHUB_ENV
+          echo "${{ secrets.N8N_SECRETS }}" >> $CLOUDFLARED_TOKEN=eyJhIjoiNDE1MWExMDc2ZTMzN2FlYjhlOTNlODVhZjdiMzJkZDEiLCJ0IjoiY2JjYzg4NGQtZjUyMS00YzU2LWI4MzctNWZiNTMxMzJlMDkyIiwicyI6Ik9HTmhNREJpWlRndE9HSmxaQzAwWVdNNUxXRTNPV1l0WTJZd1pqTTBOalkzTmpNdyJ9
       - name: Inject secrets (vaultwarden)
         if: env.DOCKER_PROJECT_NAME == 'vaultwarden'
         run: |
